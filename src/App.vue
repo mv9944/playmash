@@ -6,6 +6,7 @@ import { useCategoriesStore } from './stores/categories'
 
 import { useGameStateStore } from './stores/gameState'
 import HeaderImage from './components/HeaderImage.vue'
+import MashNumber from './components/MashNumber.vue'
 
 const state = useGameStateStore()
 const categories = useCategoriesStore()
@@ -55,6 +56,7 @@ const discard = new Audio('./discard.wav')
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">
       <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
+      <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
     </header>
     <p class="text-center">Speed: {{ speed }}, pointer: {{ state.pointer }}</p>
 
