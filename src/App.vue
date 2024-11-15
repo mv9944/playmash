@@ -68,8 +68,9 @@ function stop() {
           if="speed-control"
           v-model="speed"
           type="range"
-          min="50"
-          max="950"
+          min="150"
+          max="850"
+          step="50"
           style="direction: rtl"
           class="w-96"
         />
