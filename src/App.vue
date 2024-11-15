@@ -23,6 +23,14 @@ function play() {
       timeoutId.value = -1
       return
     }
+
+    if (step === 'step') {
+      click.play()
+    }
+
+    if (step === 'strike') {
+      discard.play()
+    }
     timeoutId.value = setTimeout(performNext, step === 'strike' ? speed.value * 4 : speed.value)
   })()
 }
@@ -31,6 +39,9 @@ function stop() {
   clearTimeout(timeoutId.value)
   timeoutId.value = -1
 }
+
+const click = new Audio('./click.wav')
+const discard = new Audio('./discard.wav')
 </script>
 
 <style>
