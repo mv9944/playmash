@@ -32,7 +32,10 @@ function play() {
     if (step === 'strike') {
       discard.play()
     }
-    timeoutId.value = setTimeout(performNext, step === 'strike' ? speed.value * 4 : speed.value)
+    timeoutId.value = setTimeout(
+      performNext,
+      step === 'strike' ? speed.value * 4 : speed.value,
+    ) as unknown as number
   })()
 }
 
