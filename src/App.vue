@@ -61,7 +61,7 @@ const discard = new Audio('./discard.wav')
       <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
       <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
     </header>
-    <p class="text-center">Speed: {{ speed }}, pointer: {{ state.pointer }}</p>
+    <!-- <p class="text-center">Speed: {{ speed }}, pointer: {{ state.pointer }}</p> -->
 
     <main class="grid md:grid-cols-2 gap-4 place-items-center">
       <CategoryItem
