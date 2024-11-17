@@ -32,7 +32,7 @@ defineProps<{
           'bg-zinc-800',
           'h-7',
         ]"
-        :value="item.title"
+        v-model="item.title"
         :disabled="item.state !== 'waiting'"
       />
     </div>
