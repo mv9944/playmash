@@ -93,7 +93,7 @@ const discard = new Audio('./discard.wav')
     </header>
 
     <main>
-      <div class="h-28 w-full flex items-center justify-center">
+      <div class="w-full flex items-center justify-center">
         <button
           v-if="state.pointer[0] === -1"
           style="font-family: Modak"
@@ -111,7 +111,10 @@ const discard = new Audio('./discard.wav')
         >
           Go!
         </button>
-        <div v-else-if="state.mashNumber" class="grid grid-cols-1 w-full place-items-center gap-4">
+        <div
+          v-else-if="state.mashNumber"
+          class="grid grid-cols-1 w-full place-items-center gap-4 fixed top-0 bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900"
+        >
           <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
         </div>
       </div>
