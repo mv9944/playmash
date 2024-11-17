@@ -11,7 +11,7 @@ defineProps<{
 <script lang="ts"></script>
 
 <template>
-  <div class="bg-zinc-800 p-4 m-4 rounded w-80 text-white border border-zinc-600">
+  <div class="bg-zinc-800 p-4 m-4 rounded w-80 text-white border border-zinc-600 mx-auto">
     <input class="bg-zinc-800 text-purple-300 text-xl p-2" :value="title" />
     <div
       v-for="(item, index) in options"

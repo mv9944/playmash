@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, useTemplateRef } from 'vue'
-import { useCategoriesStore } from './stores/categories'
+import { useCategoriesStore, defaultCategories } from './stores/categories'
 import { useGameStateStore } from './stores/gameState'
 
 import CategoryItem from './components/CategoryItem.vue'
@@ -50,6 +50,10 @@ function reset() {
   window.location.reload()
 }
 
+function selectDefault(event: Event) {
+  categories.useDefault((event.target as HTMLInputElement).value)
+}
+
 const click = new Audio('./click.wav')
 const discard = new Audio('./discard.wav')
 </script>
@@ -65,15 +69,15 @@ const discard = new Audio('./discard.wav')
   <RandomNumberModal ref="randomNumberModal" @close="play" />
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">
-      <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
+      <HeaderImage class="mx-auto m-4 w-64 sm:w-72 md:w-80 animate-wiggle" />
     </header>
 
     <main>
-      <div class="w-full flex items-center justify-center">
+      <div class="h-28 w-full flex items-center justify-center">
         <button
           v-if="state.pointer[0] === -1"
           style="font-family: Modak"
-          class="h-32 text-4xl text-pink-500 hover:text-pink-400"
+          class="text-4xl text-pink-500 hover:text-pink-400"
           @click="reset"
         >
           Restart?
@@ -81,8 +85,9 @@ const discard = new Audio('./discard.wav')
         <button
           v-else-if="state.mashNumber < 0"
           style="font-family: Modak"
-          class="h-32 text-8xl text-violet-500 hover:text-violet-400"
+          class="text-6xl text-violet-500 hover:text-violet-400"
           @click="randomNumberModal?.open"
+          :disabled="categories.categories.length === 0"
         >
           Go!
         </button>
@@ -91,7 +96,21 @@ const discard = new Audio('./discard.wav')
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-4 place-items-center">
+      <div v-if="state.mashNumber < 0" class="grid grid-cols-1 w-full place-items-center gap-4 p-4">
+        <select
+          name="defaults"
+          id="default-select"
+          class="bg-zinc-800 p-4 rounded text-white"
+          @change="selectDefault"
+        >
+          <option value="">Select a default</option>
+          <option v-for="(category, key) in defaultCategories" :value="key" :key="key">
+            {{ key }}
+          </option>
+        </select>
+      </div>
+
+      <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-2 justify-center">
         <CategoryItem
           v-for="(category, index) in categories.categories"
           :key="category.title"
@@ -100,6 +119,7 @@ const discard = new Audio('./discard.wav')
           :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
         />
       </div>
+
       <div
         v-if="state.pointer[0] !== -1 && state.mashNumber > 0"
         class="grid grid-cols-1 w-full place-items-center gap-4 p-4"
