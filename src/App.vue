@@ -107,7 +107,7 @@ const discard = new Audio('./discard.wav')
           style="font-family: Modak"
           class="text-6xl text-violet-500 hover:text-violet-400"
           @click="randomNumberModal?.open"
-          :disabled="categories.categories.length === 0"
+          :class="{ invisible: categories.categories.length === 0 }"
         >
           Go!
         </button>
@@ -143,6 +143,8 @@ const discard = new Audio('./discard.wav')
           :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
           :editable="state.mashNumber < 0"
           @new="() => categories.addOptionToCategory(category, { title: '', state: 'waiting' })"
+          @deleteCategory="() => categories.removeCategory(category)"
+          @deleteOption="(index) => categories.removeOptionFromCategory(category, index)"
         />
         <button
           @click="
@@ -152,7 +154,7 @@ const discard = new Audio('./discard.wav')
             )
           "
           v-if="state.mashNumber < 0"
-          class="border border-zinc-600 rounded w-80 h-32 mx-auto"
+          class="border border-zinc-600 rounded w-80 h-32 mx-auto my-4"
         >
           +
         </button>

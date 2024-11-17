@@ -106,8 +106,24 @@ export const useCategoriesStore = defineStore('categories', () => {
     return category
   }
 
+  function removeCategory(category: Category) {
+    const index = categories.value.indexOf(category)
+    if (index !== -1) {
+      categories.value.splice(index, 1)
+    }
+  }
+
   function addOptionToCategory(category: Category, option: CategoryOption) {
     category.options.push(option)
+  }
+
+  function removeOptionFromCategory(category: Category, index: number) {
+    if (index !== -1) {
+      category.options.splice(index, 1)
+    }
+    if (category.options.length === 0) {
+      addOptionToCategory(category, { title: '', state: 'waiting' })
+    }
   }
 
   function useDefault(category: string) {
@@ -122,6 +138,8 @@ export const useCategoriesStore = defineStore('categories', () => {
     categories,
     useDefault,
     addCategory,
+    removeCategory,
     addOptionToCategory,
+    removeOptionFromCategory,
   }
 })

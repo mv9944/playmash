@@ -11,13 +11,22 @@ defineProps<{
 
 const emit = defineEmits<{
   new: []
+  deleteCategory: []
+  deleteOption: [number]
 }>()
 </script>
 
 <script lang="ts"></script>
 
 <template>
-  <div class="bg-zinc-800 p-4 m-4 rounded w-80 text-white border border-zinc-600 mx-auto">
+  <div class="bg-zinc-800 p-4 m-4 rounded w-80 text-white border border-zinc-600 mx-auto group">
+    <button
+      class="float-right text-pink-700 opacity-70"
+      :class="{ 'invisible ': !editable }"
+      @click="emit('deleteCategory')"
+    >
+      ☒
+    </button>
     <input
       class="bg-zinc-800 text-purple-300 text-xl p-2"
       :value="title"
@@ -46,7 +55,15 @@ const emit = defineEmits<{
         ]"
         v-model="item.title"
         :disabled="!editable"
+        placeholder="change me"
       />
+      <button
+        class="text-pink-700 visible opacity-50 px-4"
+        :class="{ 'invisible ': !editable }"
+        @click="emit('deleteOption', index)"
+      >
+        ✘
+      </button>
     </div>
     <button
       v-if="editable"

@@ -55,7 +55,14 @@ defineExpose({
 
 <template>
   <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20" v-if="isOpen">
-    <div class="absolute w-full h-full bg-zinc-900 opacity-90"></div>
+    <div
+      class="absolute w-full h-full bg-zinc-900 opacity-90"
+      @click="
+        () => {
+          isOpen = false
+        }
+      "
+    ></div>
 
     <div class="absolute w-80 select-none">
       <div class="bg-zinc-800 overflow-hidden rounded flex flex-col p-4">
