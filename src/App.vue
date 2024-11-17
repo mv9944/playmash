@@ -141,7 +141,21 @@ const discard = new Audio('./discard.wav')
           :options="category.options"
           :group="index"
           :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
+          :editable="state.mashNumber < 0"
+          @new="() => categories.addOptionToCategory(category, { title: '', state: 'waiting' })"
         />
+        <button
+          @click="
+            categories.addOptionToCategory(
+              categories.addCategory({ title: 'New category', options: [] }),
+              { title: '', state: 'waiting' },
+            )
+          "
+          v-if="state.mashNumber < 0"
+          class="border border-zinc-600 rounded w-80 h-32 mx-auto"
+        >
+          +
+        </button>
       </div>
       <div class="h-32"></div>
 

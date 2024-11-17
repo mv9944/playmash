@@ -6,6 +6,11 @@ defineProps<{
   options: CategoryOption[]
   group: number
   pointer: number
+  editable: boolean
+}>()
+
+const emit = defineEmits<{
+  new: []
 }>()
 </script>
 
@@ -13,7 +18,11 @@ defineProps<{
 
 <template>
   <div class="bg-zinc-800 p-4 m-4 rounded w-80 text-white border border-zinc-600 mx-auto">
-    <input class="bg-zinc-800 text-purple-300 text-xl p-2" :value="title" />
+    <input
+      class="bg-zinc-800 text-purple-300 text-xl p-2"
+      :value="title"
+      :class="{ 'border-b-2 border-zinc-600': editable }"
+    />
     <div
       v-for="(item, index) in options"
       :key="index"
@@ -28,6 +37,7 @@ defineProps<{
         :class="[
           {
             'text-teal-500 font-bold text-xl': item.state === 'chosen',
+            'border-b-2 border-zinc-600': editable,
             'line-through decoration-2 decoration-pink-500 text-sm text-zinc-500':
               item.state === 'discarded',
           },
@@ -35,8 +45,15 @@ defineProps<{
           'h-7',
         ]"
         v-model="item.title"
-        :disabled="item.state !== 'waiting'"
+        :disabled="!editable"
       />
     </div>
+    <button
+      v-if="editable"
+      @click="emit('new')"
+      class="w-full bg-zinc-700 hover:bg-zinc-600 p-2 rounded"
+    >
+      +
+    </button>
   </div>
 </template>

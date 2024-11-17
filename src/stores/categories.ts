@@ -103,6 +103,7 @@ export const useCategoriesStore = defineStore('categories', () => {
 
   function addCategory(category: Category) {
     categories.value.push(category)
+    return category
   }
 
   function addOptionToCategory(category: Category, option: CategoryOption) {
