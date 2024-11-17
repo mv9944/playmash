@@ -4,6 +4,7 @@ import { type CategoryOption } from '../stores/categories'
 defineProps<{
   title: string
   options: CategoryOption[]
+  group: number
   pointer: number
 }>()
 </script>
@@ -23,6 +24,7 @@ defineProps<{
         <span v-else>👉</span>
       </span>
       <input
+        :id="`option-${group}-${index}`"
         :class="[
           {
             'text-teal-500 font-bold text-xl': item.state === 'chosen',

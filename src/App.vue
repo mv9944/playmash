@@ -116,13 +116,15 @@ const discard = new Audio('./discard.wav')
           :key="category.title"
           :title="category.title"
           :options="category.options"
+          :group="index"
           :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
         />
       </div>
+      <div class="h-32"></div>
 
       <div
         v-if="state.pointer[0] !== -1 && state.mashNumber > 0"
-        class="grid grid-cols-1 w-full place-items-center gap-4 p-4"
+        class="grid grid-cols-1 w-full place-items-center gap-4 p-4 z-10 fixed bottom-0 bg-zinc-900"
       >
         <div class="flex gap-4">
           <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">▶</GameButton>

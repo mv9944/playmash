@@ -38,6 +38,9 @@ export const useGameStateStore = defineStore('gameState', () => {
     }
 
     pointer.value = [row, col]
+    document
+      .getElementById(`option-${row}-${col}`)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     currentCount.value++
 
     if (currentCount.value === mashNumber.value) {
