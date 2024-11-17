@@ -7,7 +7,7 @@ export type step = 'finished' | 'strike' | 'step'
 export const useGameStateStore = defineStore('gameState', () => {
   const categories = useCategoriesStore()
   const pointer = ref([0, 0])
-  const mashNumber = ref(5)
+  const mashNumber = ref(-1)
   const currentCount = ref(0)
 
   function setMashNumber(num: number) {

@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
+import { useCategoriesStore } from './stores/categories'
+import { useGameStateStore } from './stores/gameState'
+
 import CategoryItem from './components/CategoryItem.vue'
 import GameButton from './components/GameButton.vue'
-import { useCategoriesStore } from './stores/categories'
-
-import { useGameStateStore } from './stores/gameState'
 import HeaderImage from './components/HeaderImage.vue'
 import MashNumber from './components/MashNumber.vue'
+import RandomNumberModal from './components/RandomNumberModal.vue'
 
 const state = useGameStateStore()
 const categories = useCategoriesStore()
 const speed = ref(500)
 const timeoutId = ref(-1)
+const randomNumberModal = useTemplateRef('randomNumberModal')
 
 function play() {
   if (timeoutId.value !== -1) {
@@ -56,12 +58,24 @@ const discard = new Audio('./discard.wav')
 </style>
 
 <template>
+  <RandomNumberModal ref="randomNumberModal" />
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">
       <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
-      <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
+      <MashNumber
+        v-if="state.mashNumber > 0"
+        :currentCount="state.currentCount"
+        :mashNumber="state.mashNumber"
+      />
+      <button
+        v-if="state.mashNumber < 0"
+        style="font-family: Modak"
+        class="h-32 text-8xl text-violet-500 hover:text-violet-400"
+        @click="randomNumberModal?.open"
+      >
+        Go!
+      </button>
     </header>
-    <!-- <p class="text-center">Speed: {{ speed }}, pointer: {{ state.pointer }}</p> -->
 
     <main class="grid md:grid-cols-2 gap-4 place-items-center">
       <CategoryItem
