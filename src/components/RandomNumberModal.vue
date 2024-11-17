@@ -10,6 +10,7 @@ const props = defineProps({
     default: false,
   },
 })
+const emit = defineEmits(['close'])
 
 const isOpen = ref(props.isOpen)
 
@@ -28,6 +29,7 @@ function close() {
 
   window.removeEventListener('deviceorientation', generateNumber)
   window.removeEventListener('mousemove', generateNumber)
+  emit('close')
 }
 
 function generateNumber() {

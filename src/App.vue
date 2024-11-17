@@ -46,6 +46,10 @@ function stop() {
   timeoutId.value = -1
 }
 
+function reset() {
+  window.location.reload()
+}
+
 const click = new Audio('./click.wav')
 const discard = new Audio('./discard.wav')
 </script>
@@ -58,23 +62,29 @@ const discard = new Audio('./discard.wav')
 </style>
 
 <template>
-  <RandomNumberModal ref="randomNumberModal" />
+  <RandomNumberModal ref="randomNumberModal" @close="play" />
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">
       <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
-      <MashNumber
-        v-if="state.mashNumber > 0"
-        :currentCount="state.currentCount"
-        :mashNumber="state.mashNumber"
-      />
       <button
-        v-if="state.mashNumber < 0"
+        v-if="state.pointer[0] === -1"
+        style="font-family: Modak"
+        class="h-32 text-4xl text-pink-500 hover:text-pink-400"
+        @click="reset"
+      >
+        Restart?
+      </button>
+      <button
+        v-else-if="state.mashNumber < 0"
         style="font-family: Modak"
         class="h-32 text-8xl text-violet-500 hover:text-violet-400"
         @click="randomNumberModal?.open"
       >
         Go!
       </button>
+      <div v-else-if="state.mashNumber" class="grid grid-cols-1 w-full place-items-center gap-4">
+        <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
+      </div>
     </header>
 
     <main class="grid md:grid-cols-2 gap-4 place-items-center">
@@ -87,10 +97,13 @@ const discard = new Audio('./discard.wav')
       />
     </main>
 
-    <div class="grid grid-cols-1 w-full place-items-center gap-4 p-4">
+    <div
+      v-if="state.pointer[0] !== -1 && state.mashNumber > 0"
+      class="grid grid-cols-1 w-full place-items-center gap-4 p-4"
+    >
       <div class="flex gap-4">
-        <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">Play</GameButton>
-        <GameButton :color="'pink'" :pressed="timeoutId === -1" @click="stop()">Stop</GameButton>
+        <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">▶</GameButton>
+        <GameButton :color="'pink'" :pressed="timeoutId === -1" @click="stop()">■</GameButton>
       </div>
       <div class="flex flex-col gap-2">
         <label for="speed-control">Speed: {{ speed }}ms</label>

@@ -3,12 +3,16 @@ defineProps<{
   color: string
   pressed: boolean
 }>()
+
+const emit = defineEmits<{
+  click: []
+}>()
 </script>
 
 <template>
   <button
-    @click="$emit('click')"
-    class="py-2 px-6 rounded border-b-4"
+    @click="emit('click')"
+    class="size-8 rounded border-b-4"
     v-bind:class="[
       {
         'border-none shadow-inner shadow-black brightness-75': pressed,
