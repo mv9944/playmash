@@ -12,7 +12,7 @@ import HeaderImage from './components/HeaderImage.vue'
       </RouterLink>
       <RouterLink
         to="/how-to-play"
-        class="text-pink-500 underline text-xs -translate-y-4 translate-x-24 block opacity-50 hover:opacity-100"
+        class="text-pink-500 underline text-xs -translate-y-4 translate-x-24 inline-block opacity-50 hover:opacity-100 w-32"
         >How to play?</RouterLink
       >
     </header>
