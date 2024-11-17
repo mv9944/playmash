@@ -8,7 +8,7 @@ defineProps<{
 <template>
   <div
     style="font-family: Modak"
-    class="h-32 md:h-36 flex flex-col justify-center items-center"
+    class="h-40 flex flex-col justify-center items-center"
     :class="{
       'animate-heartbeat text-violet-500 text-8xl': currentCount === 0,
       'text-6xl': currentCount !== 0,
