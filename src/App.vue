@@ -54,6 +54,26 @@ function selectDefault(event: Event) {
   categories.useDefault((event.target as HTMLInputElement).value)
 }
 
+function emojiForSpeed(speed: number) {
+  return {
+    150: '⚡️⚡️⚡️⚡️⚡️⚡️⚡️',
+    200: '⚡️⚡️⚡️⚡️⚡️⚡️',
+    250: '⚡️⚡️⚡️⚡️⚡️',
+    300: '⚡️⚡️⚡️⚡️',
+    350: '⚡️⚡️⚡️️',
+    400: '⚡️⚡️',
+    450: '️⚡️',
+    500: '️ ',
+    550: '️🐌',
+    600: '️🐌🐌',
+    650: '🐌🐌🐌️',
+    700: '🐌🐌🐌️',
+    750: '🐌🐌🐌🐌️',
+    800: '🐌🐌🐌🐌🐌',
+    850: '🐌🐌️🐌🐌🐌🐌',
+  }[speed]
+}
+
 const click = new Audio('./click.wav')
 const discard = new Audio('./discard.wav')
 </script>
@@ -130,8 +150,8 @@ const discard = new Audio('./discard.wav')
           <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">▶</GameButton>
           <GameButton :color="'pink'" :pressed="timeoutId === -1" @click="stop()">■</GameButton>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="speed-control">Speed: {{ speed }}ms</label>
+        <div class="flex flex-col gap-2 text-center">
+          <label for="speed-control">{{ emojiForSpeed(speed) }}</label>
           <input
             if="speed-control"
             v-model="speed"
