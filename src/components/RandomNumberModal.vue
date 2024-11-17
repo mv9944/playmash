@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useGameStateStore } from '@/stores/gameState'
 import { ref } from 'vue'
+import ShakingPhone from './ShakingPhone.vue'
 
 const state = useGameStateStore()
 
@@ -13,18 +14,26 @@ const props = defineProps({
 const emit = defineEmits(['close'])
 
 const isOpen = ref(props.isOpen)
+const shakeable = ref(false)
 
 function open() {
   isOpen.value = true
-  generateNumber()
+  window.addEventListener('devicemotion', generateNumber)
 }
 
 function close() {
   isOpen.value = false
+  window.removeEventListener('devicemotion', generateNumber)
   emit('close')
 }
 
-function generateNumber() {
+function generateNumber(e?: Event | DeviceMotionEvent | undefined) {
+  if (e instanceof DeviceMotionEvent) {
+    shakeable.value = true
+    if ((e.acceleration?.x || 0) < 1) {
+      return // Not enough shaking!!
+    }
+  }
   state.mashNumber = Math.max(3, Math.floor(Math.random() * 12))
 }
 
@@ -36,7 +45,7 @@ defineExpose({
 
 <template>
   <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-10" v-if="isOpen">
-    <div class="absolute w-full h-full bg-zinc-900 opacity-70"></div>
+    <div class="absolute w-full h-full bg-zinc-900 opacity-90"></div>
 
     <div class="absolute w-80 select-none">
       <div class="bg-zinc-800 overflow-hidden rounded flex flex-col p-4">
@@ -46,13 +55,21 @@ defineExpose({
           @click="close"
           @mousemove="generateNumber"
         >
-          {{ state.mashNumber }}
+          {{ state.mashNumber === -1 ? '?' : state.mashNumber }}
         </div>
         <div class="flex flex-row">
-          <div class="text-center w-full mt-4">
-            <button @click="close" class="text-white bg-teal-500 py-2 px-4 rounded cursor-pointer">
+          <div class="text-center w-full mt-4 h-10">
+            <button
+              @click="close"
+              v-if="state.mashNumber > 0"
+              class="text-white bg-teal-500 py-2 px-4 rounded cursor-pointer"
+            >
               I'm ready!
             </button>
+            <ShakingPhone
+              v-if="shakeable"
+              class="size-8 absolute bottom-4 right-4 fill-zinc-500 animate-wobble"
+            />
           </div>
         </div>
       </div>
