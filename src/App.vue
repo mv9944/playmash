@@ -66,58 +66,62 @@ const discard = new Audio('./discard.wav')
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">
       <HeaderImage class="mx-auto m-4 w-72 sm:w-80 md:w-96 animate-wiggle" />
-      <button
-        v-if="state.pointer[0] === -1"
-        style="font-family: Modak"
-        class="h-32 text-4xl text-pink-500 hover:text-pink-400"
-        @click="reset"
-      >
-        Restart?
-      </button>
-      <button
-        v-else-if="state.mashNumber < 0"
-        style="font-family: Modak"
-        class="h-32 text-8xl text-violet-500 hover:text-violet-400"
-        @click="randomNumberModal?.open"
-      >
-        Go!
-      </button>
-      <div v-else-if="state.mashNumber" class="grid grid-cols-1 w-full place-items-center gap-4">
-        <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
-      </div>
     </header>
 
-    <main class="grid md:grid-cols-2 gap-4 place-items-center">
-      <CategoryItem
-        v-for="(category, index) in categories.categories"
-        :key="category.title"
-        :title="category.title"
-        :options="category.options"
-        :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
-      />
-    </main>
-
-    <div
-      v-if="state.pointer[0] !== -1 && state.mashNumber > 0"
-      class="grid grid-cols-1 w-full place-items-center gap-4 p-4"
-    >
-      <div class="flex gap-4">
-        <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">▶</GameButton>
-        <GameButton :color="'pink'" :pressed="timeoutId === -1" @click="stop()">■</GameButton>
+    <main>
+      <div class="w-full flex items-center justify-center">
+        <button
+          v-if="state.pointer[0] === -1"
+          style="font-family: Modak"
+          class="h-32 text-4xl text-pink-500 hover:text-pink-400"
+          @click="reset"
+        >
+          Restart?
+        </button>
+        <button
+          v-else-if="state.mashNumber < 0"
+          style="font-family: Modak"
+          class="h-32 text-8xl text-violet-500 hover:text-violet-400"
+          @click="randomNumberModal?.open"
+        >
+          Go!
+        </button>
+        <div v-else-if="state.mashNumber" class="grid grid-cols-1 w-full place-items-center gap-4">
+          <MashNumber :currentCount="state.currentCount" :mashNumber="state.mashNumber" />
+        </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <label for="speed-control">Speed: {{ speed }}ms</label>
-        <input
-          if="speed-control"
-          v-model="speed"
-          type="range"
-          min="150"
-          max="850"
-          step="50"
-          style="direction: rtl"
-          class="w-96"
+
+      <div class="grid md:grid-cols-2 gap-4 place-items-center">
+        <CategoryItem
+          v-for="(category, index) in categories.categories"
+          :key="category.title"
+          :title="category.title"
+          :options="category.options"
+          :pointer="state.pointer[0] === index ? state.pointer[1] : -1"
         />
       </div>
-    </div>
+      <div
+        v-if="state.pointer[0] !== -1 && state.mashNumber > 0"
+        class="grid grid-cols-1 w-full place-items-center gap-4 p-4"
+      >
+        <div class="flex gap-4">
+          <GameButton :color="'teal'" :pressed="timeoutId > 0" @click="play()">▶</GameButton>
+          <GameButton :color="'pink'" :pressed="timeoutId === -1" @click="stop()">■</GameButton>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="speed-control">Speed: {{ speed }}ms</label>
+          <input
+            if="speed-control"
+            v-model="speed"
+            type="range"
+            min="150"
+            max="850"
+            step="50"
+            style="direction: rtl"
+            class="w-96"
+          />
+        </div>
+      </div>
+    </main>
   </div>
 </template>

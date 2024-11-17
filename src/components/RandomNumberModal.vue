@@ -14,21 +14,13 @@ const emit = defineEmits(['close'])
 
 const isOpen = ref(props.isOpen)
 
-const title = 'Click when ready!'
-
 function open() {
   isOpen.value = true
   generateNumber()
-
-  window.addEventListener('devicemotion', generateNumber)
-  window.addEventListener('mousemove', generateNumber)
 }
 
 function close() {
   isOpen.value = false
-
-  window.removeEventListener('deviceorientation', generateNumber)
-  window.removeEventListener('mousemove', generateNumber)
   emit('close')
 }
 
@@ -44,19 +36,24 @@ defineExpose({
 
 <template>
   <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-10" v-if="isOpen">
-    <div class="absolute w-full h-full bg-zinc-900 opacity-70" @click="close"></div>
+    <div class="absolute w-full h-full bg-zinc-900 opacity-70"></div>
 
-    <div class="absolute w-80 cursor-pointer select-none">
-      <div class="bg-zinc-800 overflow-hidden rounded flex flex-col">
-        <div class="flex flex-row">
-          <div class="text-zinc-400 py-5 text-center w-full">{{ title }}</div>
-        </div>
+    <div class="absolute w-80 select-none">
+      <div class="bg-zinc-800 overflow-hidden rounded flex flex-col p-4">
         <div
           style="font-family: Modak"
-          class="h-72 px-4 py-4 flex flex-col justify-center items-center text-violet-500 text-8xl"
+          class="border border-zinc-600 rounded cursor-move h-72 flex flex-col justify-center items-center text-violet-500 text-8xl"
           @click="close"
+          @mousemove="generateNumber"
         >
           {{ state.mashNumber }}
+        </div>
+        <div class="flex flex-row">
+          <div class="text-center w-full mt-4">
+            <button @click="close" class="text-white bg-teal-500 py-2 px-4 rounded cursor-pointer">
+              I'm ready!
+            </button>
+          </div>
         </div>
       </div>
     </div>
