@@ -60,6 +60,17 @@ export const useGameStateStore = defineStore('gameState', () => {
     return 'step'
   }
 
+  function reset() {
+    pointer.value = [0, 0]
+    mashNumber.value = -1
+    currentCount.value = 0
+    for (const category of categories.categories) {
+      for (const option of category.options) {
+        option.state = 'waiting'
+      }
+    }
+  }
+
   return {
     categories,
     pointer,
@@ -67,5 +78,6 @@ export const useGameStateStore = defineStore('gameState', () => {
     setMashNumber,
     mashNumber,
     currentCount,
+    reset,
   }
 })

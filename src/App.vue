@@ -47,7 +47,7 @@ function stop() {
 }
 
 function reset() {
-  window.location.reload()
+  state.reset()
 }
 
 function selectDefault(event: Event) {
