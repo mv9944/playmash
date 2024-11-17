@@ -18,16 +18,6 @@ const shakeable = ref(false)
 
 function open() {
   isOpen.value = true
-  if (
-    typeof DeviceMotionEvent !== 'undefined' &&
-    typeof DeviceMotionEvent.requestPermission === 'function'
-  ) {
-    DeviceMotionEvent.requestPermission().then((response) => {
-      if (response == 'granted') {
-        window.addEventListener('devicemotion', generateNumber)
-      }
-    })
-  }
   window.addEventListener('devicemotion', generateNumber)
 }
 
