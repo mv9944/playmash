@@ -44,7 +44,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-10" v-if="isOpen">
+  <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20" v-if="isOpen">
     <div class="absolute w-full h-full bg-zinc-900 opacity-90"></div>
 
     <div class="absolute w-80 select-none">
