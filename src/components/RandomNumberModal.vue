@@ -40,7 +40,7 @@ function close() {
 function generateNumber(e?: Event | DeviceMotionEvent | undefined) {
   if (e instanceof DeviceMotionEvent) {
     shakeable.value = true
-    if ((e.acceleration?.x || 0) < 1) {
+    if ((e.acceleration?.x || 0) < 3) {
       return // Not enough shaking!!
     }
   }
