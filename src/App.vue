@@ -4,6 +4,13 @@ import { RouterLink, RouterView } from 'vue-router'
 import HeaderImage from './components/HeaderImage.vue'
 </script>
 
+<style>
+@font-face {
+  font-family: Modak;
+  src: url('./assets/Modak-Regular.ttf');
+}
+</style>
+
 <template>
   <div class="h-full flex flex-col text-white">
     <header class="w-full text-center text-white p-4 pb-0">

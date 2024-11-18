@@ -77,13 +77,6 @@ const click = new Audio('./click.wav')
 const discard = new Audio('./discard.wav')
 </script>
 
-<style>
-@font-face {
-  font-family: Modak;
-  src: url('./assets/Modak-Regular.ttf');
-}
-</style>
-
 <template>
   <RandomNumberModal ref="randomNumberModal" @close="play" />
   <div class="w-full flex items-center justify-center">
