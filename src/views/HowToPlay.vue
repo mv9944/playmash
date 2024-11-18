@@ -1,5 +1,7 @@
 <template>
-  <article class="w-96 mx-auto prose prose-invert prose-zinc prose-p:my-4 mb-80 text-justify">
+  <article
+    class="w-96 mx-auto prose prose-invert prose-zinc prose-p:my-4 mb-80 text-justify prose-headings:font-normal"
+  >
     <h1
       style="font-family: Modak"
       class="text-5xl mb-4 text-pink-500 bg-zinc-900 text-center pt-2 my-4 rounded"
@@ -38,7 +40,7 @@
     <span style="font-family: Modak" class="block text-center text-violet-500 text-6xl">Go!</span>
     <p>
       You will then need to generate a random number. On desktop, you can
-      <span class="animate-wiggle text-pink-500 inline-block">move</span> the mouse. On mobile, if
+      <span class="animate-eight text-pink-500 inline-block">move</span> the mouse. On mobile, if
       supported by your device, you can
       <span class="animate-wobble text-pink-500 inline-block">shake</span> your phone.
     </p>

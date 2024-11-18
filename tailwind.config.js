@@ -49,11 +49,41 @@ export default {
             transform: 'translate3d(0, 0, 0)',
           },
         },
+        eight: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '15%': {
+            transform: 'translate(-25%, -25%)',
+          },
+          '30%': {
+            transform: 'translate(-25%, 25%)',
+          },
+          '45%': {
+            transform: 'translate(25%, -25%)',
+          },
+          '60%': {
+            transform: 'translate(25%, 25%)',
+          },
+          '75%': {
+            transform: 'translate(0, 0)',
+          },
+          '80%': {
+            transform: 'scale(1, 1);',
+          },
+          '82%': {
+            transform: 'scale(75%, 75%);',
+          },
+          '84%': {
+            transform: 'scale(1, 1);',
+          },
+        },
       },
       animation: {
         wiggle: 'wiggle 2s ease-in-out infinite',
         heartbeat: 'heartbeat 1s',
         wobble: 'wobble 1s infinite',
+        eight: 'eight 3s infinite',
       },
     },
   },

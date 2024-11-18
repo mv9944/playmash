@@ -2,6 +2,7 @@
 import { useGameStateStore } from '@/stores/gameState'
 import { ref } from 'vue'
 import ShakingPhone from './ShakingPhone.vue'
+import ComputerMouse from './ComputerMouse.vue'
 
 const state = useGameStateStore()
 
@@ -73,9 +74,14 @@ defineExpose({
             >
               I'm ready!
             </button>
+
             <ShakingPhone
               v-if="shakeable"
               class="size-8 absolute bottom-4 right-4 fill-zinc-500 animate-wobble"
+            />
+            <ComputerMouse
+              v-else
+              class="size-4 absolute bottom-4 right-4 fill-zinc-500 animate-eight"
             />
           </div>
         </div>
