@@ -30,7 +30,7 @@ const emit = defineEmits<{
     <input
       class="bg-zinc-800 text-purple-300 text-xl p-2"
       :value="title"
-      :class="{ 'border-b-2 border-zinc-600': editable }"
+      :class="{ 'border-b-2 border-zinc-700': editable }"
     />
     <div
       v-for="(item, index) in options"
@@ -46,7 +46,7 @@ const emit = defineEmits<{
         :class="[
           {
             'text-teal-500 font-bold text-xl': item.state === 'chosen',
-            'border-b-2 border-zinc-600': editable,
+            'border-b-2 border-zinc-700': editable,
             'line-through decoration-2 decoration-pink-500 text-sm text-zinc-500':
               item.state === 'discarded',
           },
@@ -58,7 +58,7 @@ const emit = defineEmits<{
         placeholder="change me"
       />
       <button
-        class="text-pink-700 visible opacity-50 px-4"
+        class="text-pink-700 visible opacity-50 px-px py-1"
         :class="{ 'invisible ': !editable }"
         @click="emit('deleteOption', index)"
       >
