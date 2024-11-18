@@ -28,6 +28,7 @@ const emit = defineEmits<{
       ☒
     </button>
     <input
+      name="title"
       class="bg-zinc-800 text-purple-300 text-xl p-2"
       :value="title"
       :class="{ 'border-b-2 border-zinc-700': editable }"
@@ -37,11 +38,12 @@ const emit = defineEmits<{
       :key="index"
       class="list-none px-6 py-3 flex flex-row overflow-hidden"
     >
-      <span :class="{ invisible: index !== pointer }" class="mr-2">
+      <span name="pointer" :class="{ invisible: index !== pointer }" class="mr-2">
         <span v-if="item.state === 'discarded'">❌</span>
         <span v-else>👉</span>
       </span>
       <input
+        name="option"
         :id="`option-${group}-${index}`"
         :class="[
           {
