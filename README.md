@@ -1,6 +1,14 @@
-# MASH
+<p align="center">
+    <img src="mash.png" width="400px">
+    <div align="center">
+        <img src="https://img.shields.io/github/actions/workflow/status/alxwrd/playmash/deploy.yml">
+        <img src="https://img.shields.io/website?url=https%3A%2F%2Fplaymash.online">
+    </div>
+</p>
 
-This is an implmentation of the fortune telling game MASH with Vue 3.
+---
+
+An implementation of the fortune telling game MASH with Vue 3 available at https://playmash.online/.
 
 [How to Play MASH](https://www.youtube.com/watch?v=iaZ9m39-BbE)
 
