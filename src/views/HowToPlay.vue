@@ -22,7 +22,7 @@
       include: Who you'll marry, your job, your salary, where you'll live, etc.
     </p>
     <p>
-      To create your a category, click the plus button.
+      To create a category, click the plus button.
       <button class="border border-zinc-600 rounded w-72 h-32 m-6">+</button>
     </p>
     <p>
