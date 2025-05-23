@@ -12,8 +12,8 @@ import HeaderImage from './components/HeaderImage.vue'
 </style>
 
 <template>
-  <div class="h-full flex flex-col text-white">
-    <header class="w-full text-center text-white p-4 pb-0">
+  <div class="h-full flex flex-col text-black">
+    <header class="w-full text-center text-black p-4 pb-0">
       <RouterLink to="/">
         <HeaderImage class="mx-auto m-4 w-64 sm:w-72 md:w-80 animate-wiggle" />
       </RouterLink>

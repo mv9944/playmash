@@ -70,7 +70,7 @@ defineExpose({
             <button
               @click="close"
               v-if="state.mashNumber > 0"
-              class="text-white bg-teal-500 py-2 px-4 rounded cursor-pointer"
+              class="text-black bg-teal-500 py-2 px-4 rounded cursor-pointer"
             >
               I'm ready!
             </button>
